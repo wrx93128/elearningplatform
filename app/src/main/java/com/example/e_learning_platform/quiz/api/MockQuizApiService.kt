@@ -19,6 +19,10 @@ import java.util.UUID
 
 class MockQuizApiService : QuizApiService {
 
+    companion object {
+        val default: QuizApiService = MockQuizApiService()
+    }
+
     private data class StoredQuiz(
         val id: String,
         val createRequest: CreateQuizRequest
