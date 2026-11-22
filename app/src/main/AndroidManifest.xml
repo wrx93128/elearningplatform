@@ -23,6 +23,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".quiz.ui.CreateQuizActivity"
+            android:exported="false"
+            android:label="Kreator Quizu"
+            android:theme="@style/Theme.Elearningplatform"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".quiz.ui.QuizTakingActivity"
+            android:exported="false"
+            android:label="Rozwiązywanie Quizu"
+            android:theme="@style/Theme.Elearningplatform"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

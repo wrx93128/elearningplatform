@@ -304,4 +304,35 @@ class QuizStructuresTest {
         assertEquals(2, result.questionResults.size)
         assertTrue(result.questionResults.all { it.isCorrect })
     }
+
+    @Test
+    fun quizCreationState_fullBuilderAndApiPersistence() = runBlocking {
+        var state = QuizCreationState()
+        state = state.updateTitle("Nowy quiz testowy")
+        state = state.updateDescription("Opis quizu testowego")
+        state = state.updateTimeLimit(15)
+        state = state.updatePassingPercentage(75)
+
+        val q1Id = state.questions.first().id
+        state = state.updateQuestionText(q1Id, "Ile wynosi 10 * 10?")
+        state = state.updateQuestionPoints(q1Id, 4)
+        state = state.updateQuestionExplanation(q1Id, "10 * 10 = 100")
+
+        val q1Opt1Id = state.questions.first().options[0].id
+        val q1Opt2Id = state.questions.first().options[1].id
+        state = state.updateOptionText(q1Id, q1Opt1Id, "100")
+        state = state.updateOptionText(q1Id, q1Opt2Id, "90")
+
+        val validation = state.validate()
+        assertTrue(validation is QuizValidationResult.Valid)
+
+        val createRequest = state.toCreateQuizRequest()
+        val createdQuiz = MockQuizApiService.default.createQuiz(createRequest).getOrThrow()
+        assertEquals("Nowy quiz testowy", createdQuiz.title)
+        assertEquals(4, createdQuiz.totalPoints)
+        assertEquals(1, createdQuiz.questionCount)
+
+        val fetched = MockQuizApiService.default.getQuizById(createdQuiz.id).getOrThrow()
+        assertEquals(createdQuiz.id, fetched.id)
+    }
 }

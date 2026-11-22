@@ -74,6 +74,14 @@ data class QuizCreationState(
         )
     }
 
+    fun updateQuestionExplanation(questionId: String, explanation: String): QuizCreationState {
+        return copy(
+            questions = questions.map { q ->
+                if (q.id == questionId) q.copy(explanation = explanation.ifBlank { null }) else q
+            }
+        )
+    }
+
     fun addOption(questionId: String, defaultText: String = ""): QuizCreationState {
         return copy(
             questions = questions.map { q ->
