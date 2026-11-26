@@ -1,5 +1,6 @@
 package com.example.e_learning_platform.quiz.api
 
+import com.example.e_learning_platform.network.ApiProvider
 import com.example.e_learning_platform.quiz.model.CreateQuizRequest
 import com.example.e_learning_platform.quiz.model.Quiz
 import com.example.e_learning_platform.quiz.model.QuizResult
@@ -15,4 +16,8 @@ interface QuizApiService {
     suspend fun getQuizById(id: String): Result<Quiz>
 
     suspend fun submitQuiz(submission: QuizSubmissionRequest): Result<QuizResult>
+
+    companion object {
+        val default: QuizApiService get() = ApiProvider.quizApiService
+    }
 }

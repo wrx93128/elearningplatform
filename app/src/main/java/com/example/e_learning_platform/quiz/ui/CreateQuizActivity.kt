@@ -57,7 +57,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import com.example.e_learning_platform.quiz.api.MockQuizApiService
+import com.example.e_learning_platform.quiz.api.QuizApiService
 import com.example.e_learning_platform.quiz.model.CreateQuestionRequest
 import com.example.e_learning_platform.quiz.model.QuestionType
 import com.example.e_learning_platform.quiz.model.Quiz
@@ -109,7 +109,7 @@ fun CreateQuizScreen(
             is QuizValidationResult.Valid -> {
                 coroutineScope.launch {
                     isSubmitting = true
-                    val result = MockQuizApiService.default.createQuiz(state.toCreateQuizRequest())
+                    val result = QuizApiService.default.createQuiz(state.toCreateQuizRequest())
                     isSubmitting = false
                     result.onSuccess { createdQuiz ->
                         Toast.makeText(context, "Quiz '${createdQuiz.title}' został utworzony!", Toast.LENGTH_SHORT).show()

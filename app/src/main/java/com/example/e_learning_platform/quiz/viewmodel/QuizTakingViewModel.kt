@@ -2,7 +2,6 @@ package com.example.e_learning_platform.quiz.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.e_learning_platform.quiz.api.MockQuizApiService
 import com.example.e_learning_platform.quiz.api.QuizApiService
 import com.example.e_learning_platform.quiz.model.QuestionType
 import com.example.e_learning_platform.quiz.model.Quiz
@@ -16,7 +15,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class QuizTakingViewModel(
-    private val apiService: QuizApiService = MockQuizApiService.default
+    private val apiService: QuizApiService = QuizApiService.default
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<QuizTakingUiState>(QuizTakingUiState.Loading)

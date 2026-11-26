@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.e_learning_platform.auth.api.AuthApiService
-import com.example.e_learning_platform.auth.api.MockAuthApiService
 import com.example.e_learning_platform.auth.data.ISessionManager
 import com.example.e_learning_platform.auth.data.SessionManager
 import com.example.e_learning_platform.auth.model.AuthValidation
@@ -56,7 +55,7 @@ data class AuthUiState(
 
 class AuthViewModel @JvmOverloads constructor(
     application: Application,
-    private val authApiService: AuthApiService = MockAuthApiService.default,
+    private val authApiService: AuthApiService = AuthApiService.default,
     private val sessionManager: ISessionManager = SessionManager(application)
 ) : AndroidViewModel(application) {
 

@@ -55,7 +55,7 @@ import androidx.compose.ui.unit.dp
 import com.example.e_learning_platform.auth.ui.AuthContainerScreen
 import com.example.e_learning_platform.auth.viewmodel.AuthSessionState
 import com.example.e_learning_platform.auth.viewmodel.AuthViewModel
-import com.example.e_learning_platform.quiz.api.MockQuizApiService
+import com.example.e_learning_platform.quiz.api.QuizApiService
 import com.example.e_learning_platform.quiz.model.QuizSummary
 import com.example.e_learning_platform.quiz.ui.CreateQuizActivity
 import com.example.e_learning_platform.quiz.ui.QuizTakingActivity
@@ -120,7 +120,7 @@ fun MainScreen(
 
     fun loadQuizzes() {
         coroutineScope.launch {
-            val result = MockQuizApiService.default.getQuizzes()
+            val result = QuizApiService.default.getQuizzes()
             quizzes = result.getOrDefault(emptyList())
         }
     }

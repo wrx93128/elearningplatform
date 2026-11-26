@@ -5,10 +5,17 @@ import com.example.e_learning_platform.auth.model.User
 import kotlinx.coroutines.delay
 import java.util.UUID
 
+import com.example.e_learning_platform.network.ApiProvider
+
 interface AuthApiService {
     suspend fun login(email: String, password: String): Result<User>
     suspend fun register(name: String, email: String, password: String): Result<User>
+
+    companion object {
+        val default: AuthApiService get() = ApiProvider.authApiService
+    }
 }
+
 
 class MockAuthApiService(
     private val networkDelayMs: Long = 400L
